@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&family=Sansita:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700;1,800;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+.glassbg {
+  background: rgba(153, 153, 153, 0.18);
+  box-shadow: 0 4px 30px rgba(112, 112, 112, 0.1);
+  backdrop-filter: blur(15.2px);
+  -webkit-backdrop-filter: blur(15.2px);
+  border: 1px solid rgba(52, 52, 52, 0.06);
+}
+
+.config {
+  --bg: #fff;
+  --contrast: #e2e0e0;
+  position: relative;
+  padding: 5px;
+  background-color: var(--bg);
+  border-radius: 5px;
+  box-shadow: rgba(124, 124, 184, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.config-inner {
+  background-color: var(--contrast);
+  border-radius: 10px;
+  /* Content style */
+  font-size: 1rem;
+  font-weight: 900;
+  color: #fffcfc;
+  text-align: center;
+  font-family: monospace;
+}

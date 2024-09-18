@@ -1,0 +1,97 @@
+import { useGLTF } from "@react-three/drei";
+
+export function Cable(props) {
+  const { nodes, materials } = useGLTF("/Models/LandingButton/Cable.glb");
+  return (
+    <>
+      <mesh
+        castShadow
+        receiveShadow
+        geometry={nodes.OuterCoat.geometry}
+        material={materials["Material.004"]}
+        rotation={[0.698, 0.517, 0.701]}
+      >
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Cube031.geometry}
+          material={materials.StripSeparator}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1001.geometry}
+          material={materials.BlueStripe}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1002.geometry}
+          material={materials.Orange}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1003.geometry}
+          material={materials.Green}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1005.geometry}
+          material={materials.Brown}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1001_1.geometry}
+          material={materials.WhiteStripe}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1001_2.geometry}
+          material={materials.Brown}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1009.geometry}
+          material={materials.WhiteStripe}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1009_1.geometry}
+          material={materials.BlueStripe}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1011.geometry}
+          material={materials.WhiteStripe}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1011_1.geometry}
+          material={materials.Green}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1012.geometry}
+          material={materials.WhiteStripe}
+        />
+        <mesh
+          castShadow
+          receiveShadow
+          geometry={nodes.Wire1012_1.geometry}
+          material={materials.Orange}
+        />
+      </mesh>
+    </>
+  );
+}
+
+useGLTF.preload("/Models/LandingButton/Cable.glb");

@@ -1,0 +1,220 @@
+/**
+ * Reason For structuring my code like this can be found here
+ * https://chatgpt.com/share/3a7a1fbe-5b15-44ab-99fb-e78cec3d48b4
+ */
+import { proxy, subscribe } from "valtio";
+
+const VERSION = "1.0"; // Increment this whenever you make significant changes
+
+const storedStateString =
+  typeof window !== "undefined" && window?.localStorage.getItem("cablecraftReact");
+let initialState;
+
+if (storedStateString) {
+  const parsedState = JSON.parse(storedStateString);
+  if (parsedState.version === VERSION) {
+    initialState = parsedState;
+  } else {
+    // Version mismatch, clear storage and use default state
+    localStorage.removeItem("cablecraftReact");
+    initialState = {
+      version: VERSION,
+      groupActive: 1,
+      currentToolIndex: 0,
+      targetPosZ: -9.829,
+      startTraining: false,
+      playCrimpAnim: false,
+      glassbgDisplay: true,
+      showManual: false,
+      colorScheme: "T568A",
+      T568A: [
+        "#04E730",
+        "#ffffff",
+        "#04E730",
+        "#04E730",
+        "#FF8400",
+        "#ffffff",
+        "#4361EE",
+        "#4361EE",
+        "#4361EE",
+        "#ffffff",
+        "#FF8400",
+        "#FF8400",
+        "#683E27",
+        "#ffffff",
+        "#683E27",
+        "#683E27",
+      ],
+      T568B: [
+        "#FF8400",
+        "#ffffff",
+        "#FF8400",
+        "#FF8400",
+        "#04E730",
+        "#ffffff",
+        "#4361EE",
+        "#4361EE",
+        "#4361EE",
+        "#ffffff",
+        "#04E730",
+        "#04E730",
+        "#683E27",
+        "#ffffff",
+        "#683E27",
+        "#683E27",
+      ],
+      colorIndex: 0,
+      storedUserColors: [
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+      ],
+      resetUserColors: [
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+        "#fff",
+      ],
+      colors: [
+        { solid: "#04E730", striped: "#ffffff" }, // Green with white stripes
+        { solid: "#FF8400", striped: "#ffffff" }, // Orange with white stripes
+        { solid: "#4361EE", striped: "#ffffff" }, // Blue with white stripes
+        { solid: "#683E27", striped: "#ffffff" }, // Brown with white stripes
+        { solid: "#04E730", striped: "#04E730" }, // Green
+        { solid: "#FF8400", striped: "#FF8400" }, // Orange
+        { solid: "#4361EE", striped: "#4361EE" }, // Blue
+        { solid: "#683E27", striped: "#683E27" }, // Brown
+      ],
+    };
+  }
+} else {
+  // No existing data, use default state
+  initialState = {
+    version: VERSION,
+    groupActive: 1,
+    currentToolIndex: 0,
+    targetPosZ: -9.829,
+    startTraining: false,
+    playCrimpAnim: false,
+    glassbgDisplay: true,
+    showManual: false,
+    colorScheme: "T568A",
+    ethernetRest: [-0.27, 1.074, -9.73],
+    T568A: [
+      "#04E730",
+      "#ffffff",
+      "#04E730",
+      "#04E730",
+      "#FF8400",
+      "#ffffff",
+      "#4361EE",
+      "#4361EE",
+      "#4361EE",
+      "#ffffff",
+      "#FF8400",
+      "#FF8400",
+      "#683E27",
+      "#ffffff",
+      "#683E27",
+      "#683E27",
+    ],
+    T568B: [
+      "#FF8400",
+      "#ffffff",
+      "#FF8400",
+      "#FF8400",
+      "#04E730",
+      "#ffffff",
+      "#4361EE",
+      "#4361EE",
+      "#4361EE",
+      "#ffffff",
+      "#04E730",
+      "#04E730",
+      "#683E27",
+      "#ffffff",
+      "#683E27",
+      "#683E27",
+    ],
+    colorIndex: 0,
+    storedUserColors: [
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+    ],
+    resetUserColors: [
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+      "#fff",
+    ],
+    colors: [
+      { solid: "#04E730", striped: "#ffffff" }, // Green with white stripes
+      { solid: "#FF8400", striped: "#ffffff" }, // Orange with white stripes
+      { solid: "#4361EE", striped: "#ffffff" }, // Blue with white stripes
+      { solid: "#683E27", striped: "#ffffff" }, // Brown with white stripes
+      { solid: "#04E730", striped: "#04E730" }, // Green
+      { solid: "#FF8400", striped: "#FF8400" }, // Orange
+      { solid: "#4361EE", striped: "#4361EE" }, // Blue
+      { solid: "#683E27", striped: "#683E27" }, // Brown
+    ],
+  };
+}
+
+const state = proxy(initialState);
+
+subscribe(state, () => {
+  localStorage.setItem("cablecraftReact", JSON.stringify(state));
+});
+
+export { state };
