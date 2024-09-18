@@ -3,7 +3,6 @@ import { Html, MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { useSnapshot } from "valtio";
 import { IoHome } from "react-icons/io5";
 import { BsEthernet } from "react-icons/bs";
-import { useControls } from "leva";
 import { useFrame } from "@react-three/fiber";
 import { crimpingJourney } from "./Descriptions/Tuts";
 import { easing } from "maath";
@@ -12,12 +11,6 @@ import { state } from "../../../store";
 export function LabManual(props) {
   const { nodes } = useGLTF("/Models/LabScene/Manual.glb");
   const snap = useSnapshot(state);
-  const { CposZ, CscaX, CscaY, CscaZ } = useControls({
-    CposZ: { value: -9.6, min: -30, max: 30, step: 0.0001 },
-    CscaX: { value: 1.71, min: 0, max: 5, step: 0.0001 },
-    CscaY: { value: 1.69, min: 0, max: 5, step: 0.0001 },
-    CscaZ: { value: 1, min: 0, max: 5, step: 0.0001 },
-  });
 
   const glassBoard = useRef();
 
@@ -35,9 +28,8 @@ export function LabManual(props) {
         castShadow
         receiveShadow
         geometry={nodes.HtmlCard.geometry}
-        // material={nodes.HtmlCard.material}
-        position={[0.062, 1.09, CposZ]}
-        scale={[CscaX, CscaY, CscaZ]}
+        position={[0.062, 1.09, -9.6]}
+        scale={[1.71, 1.69, 1]}
       >
         <MeshTransmissionMaterial
           samples={15}

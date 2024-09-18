@@ -1,6 +1,6 @@
 import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
-import { useControls } from "leva";
+
 import { useSnapshot } from "valtio";
 import { state } from "../../../../store";
 import { easing } from "maath";
@@ -25,22 +25,15 @@ const CamRig = () => {
     );
   });
 
-  const { posX, posY, posZ, lookY, lookX } = useControls({
-    posX: { value: 0.07, min: -1, max: 1, step: 0.001 },
-    posY: { value: 0.9, min: -1, max: 1, step: 0.001 },
-    posZ: { value: -9.829, min: -20, max: 10, step: 0.001 },
-    lookY: { value: 1.1, min: -2, max: 2, step: 0.001 },
-    lookX: { value: 0.07, min: -2, max: 2, step: 0.001 },
-  });
   return (
     <>
       {/* Look At this object  */}
-      <mesh ref={lookRef} visible={false} position={[lookX, lookY, -9.829]}>
+      <mesh ref={lookRef} visible={false} position={[0.07, 1.1, -9.829]}>
         <boxGeometry />
         <meshNormalMaterial />
       </mesh>
       {/* Move Camera according to this objects locations */}
-      <mesh ref={locationRef} visible={false} position={[posX, posY, posZ]}>
+      <mesh ref={locationRef} visible={false} position={[0.07, 0.9, -9.829]}>
         <boxGeometry />
         <meshNormalMaterial />
       </mesh>
