@@ -1,16 +1,22 @@
 import { useEffect, useState } from "react";
 import { Navbar, Collapse, Typography, IconButton } from "@material-tailwind/react";
 import { HiMenu, HiOutlineX } from "react-icons/hi";
+import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
 import { state } from "../../store";
+import { useSnapshot } from "valtio";
 
 const handlePlayReversal = () => {
   state.glassbgDisplay = true;
   state.targetPosZ = -10.829 + 0.4;
   state.showManual = false;
-  state.groupActive = 1;
+  (state.showModal = false), (state.groupActive = 1);
   state.currentToolIndex = 0;
   state.startTraining = false;
   state.playCrimpAnim = false;
+  state.equalArrays = false;
+  state.internetConnection = false;
+  state.ethernetRest = [-0.27, 1.074, -9.73];
+  state.storedUserColors = state.resetUserColors;
 };
 
 const handleTutorials = () => {
@@ -19,6 +25,10 @@ const handleTutorials = () => {
   state.currentToolIndex = 0;
   state.startTraining = false;
   state.playCrimpAnim = false;
+  state.equalArrays = false;
+  (state.showModal = false), (state.internetConnection = false);
+  state.storedUserColors = state.resetUserColors;
+  state.ethernetRest = [-0.27, 1.074, -9.73];
   setTimeout(() => {
     state.showManual = true;
   }, 1000);
@@ -32,6 +42,10 @@ const handlePractice = () => {
   state.startTraining = true;
   state.playCrimpAnim = false;
   state.showManual = false;
+  state.equalArrays = false;
+  state.internetConnection = false;
+  (state.showModal = false), (state.ethernetRest = [-0.27, 1.074, -9.73]);
+  state.storedUserColors = state.resetUserColors;
 };
 
 const handleColorCode = () => {
@@ -40,6 +54,9 @@ const handleColorCode = () => {
   state.currentToolIndex = 12;
   state.startTraining = false;
   state.playCrimpAnim = false;
+  state.equalArrays = false;
+  state.ethernetRest = [-0.27, 1.074, -9.73];
+  state.storedUserColors = state.resetUserColors;
   setTimeout(() => {
     state.showManual = true;
   }, 1000);
@@ -48,37 +65,37 @@ const handleColorCode = () => {
 function NavList() {
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      <Typography as="li" variant="small" color="white" className="p-1 font-medium">
+      <Typography as="li" variant="small" color="white" className="p-1 font-medium text-xl">
         <a
           href="#"
           onClick={handlePlayReversal}
-          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#dda15e] py-2 md:py-1 "
+          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#fab15f] py-2 md:py-1 "
         >
           Home
         </a>
       </Typography>
-      <Typography as="li" variant="small" color="white" className="p-1 font-medium">
+      <Typography as="li" variant="small" color="white" className="p-1 font-medium text-xl">
         <a
           href="#"
           onClick={handleTutorials}
-          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#dda15e] py-2 md:py-1 "
+          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#fab15f] py-2 md:py-1 "
         >
           Tutorials
         </a>
       </Typography>
-      <Typography as="li" variant="small" color="white" className="p-1 font-medium">
+      <Typography as="li" variant="small" color="white" className="p-1 font-medium text-xl">
         <a
           href="#"
           onClick={handlePractice}
-          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#dda15e] py-2 md:py-1"
+          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#fab15f] py-2 md:py-1"
         >
           Practice
         </a>
       </Typography>
-      <Typography as="li" variant="small" color="white" className="p-1 font-medium">
+      <Typography as="li" variant="small" color="white" className="p-1 font-medium text-xl">
         <a
           href="#"
-          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#dda15e] py-2 md:py-1"
+          className="flex items-center hover:text-[#dda15e] transition-colors border-b-2 border-[#fab15f] py-2 md:py-1"
           onClick={handleColorCode}
         >
           Color Coding
@@ -90,6 +107,8 @@ function NavList() {
 
 const CableCraftNav = () => {
   const [openNav, setOpenNav] = useState(false);
+
+  const snap = useSnapshot(state);
 
   const handleWindowResize = () => window.innerWidth >= 960 && setOpenNav(false);
 
@@ -103,6 +122,22 @@ const CableCraftNav = () => {
 
   return (
     <>
+      {/* Modal Here */}
+      <Dialog open={snap.showModal}>
+        <DialogHeader>Congratulations!</DialogHeader>
+        <DialogBody>
+          You have successfully mastered the art of crimping. Don't forget to practice constantly in
+          order to improve your crimping and color coding skills
+        </DialogBody>
+        <DialogFooter>
+          <Button variant="text" onClick={handlePractice} className="mr-1 text-white bg-[#ffa733]">
+            Practice More
+          </Button>
+          <Button variant="text" onClick={handleTutorials} className="mr-1 text-white bg-[#ffa733]">
+            Back To Tutorials
+          </Button>
+        </DialogFooter>
+      </Dialog>
       <Navbar
         color="transparent"
         className="mx-auto max-w-screen-[2000px] md:w-[80rem] px-6 py-3 inset-x-0 absolute z-50"

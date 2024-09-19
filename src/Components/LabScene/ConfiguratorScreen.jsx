@@ -4,14 +4,13 @@ import toast from "react-hot-toast";
 import { useSnapshot } from "valtio";
 import { state } from "../../../store";
 import Joyride from "react-joyride";
-import { BsEthernet } from "react-icons/bs";
-import { Button } from "@material-tailwind/react";
 import EthernetSvg from "./EthernetSvg";
+
+import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
 
 const ConfiguratorScreen = () => {
   const snap = useSnapshot(state);
   const [selectedColorIndex, setSelectedColorIndex] = useState(snap.colorIndex);
-  const [userColors, setUserColors] = useState(snap.storedUserColors);
 
   const handleColorChange = (index) => {
     setSelectedColorIndex(index);
@@ -71,15 +70,17 @@ const ConfiguratorScreen = () => {
   useEffect(() => {
     if (snap.colorScheme == "T568A") {
       if (areArraysEqual(snap.T568A, snap.storedUserColors)) {
-        toast("Great Work Crimper!, Keep it up", {
+        toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",
+          duration: 4000,
         });
         state.equalArrays = true;
       }
     } else if (snap.colorScheme == "T568B") {
       if (areArraysEqual(snap.T568B, snap.storedUserColors)) {
-        toast("Great Work Crafter, Keep it up", {
+        toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",
+          duration: 4000,
         });
         state.equalArrays = true;
       }
@@ -103,17 +104,16 @@ const ConfiguratorScreen = () => {
 
   const crimp = () => {
     state.playCrimpAnim = true;
+    state.equalArrays = false;
+    // setTimeout(() => {
+    //   state.playCrimpAnim = false;
+    // }, 5000);
   };
 
   // Reset Colors
   const resetColors = () => {
     state.storedUserColors = snap.resetUserColors;
     state.groupActive = 0;
-  };
-
-  const resetCrimp = () => {
-    state.startTraining = true;
-    state.playCrimpAnim = false;
   };
 
   const steps = [
@@ -178,7 +178,7 @@ const ConfiguratorScreen = () => {
               options: {
                 arrowColor: "#ffffff",
                 backgroundColor: "#ffffff",
-                overlayColor: "rgba(32, 32, 32, 0.9)",
+                overlayColor: "rgba(0, 0, 0, 0.8)",
                 primaryColor: "#ffb85c",
                 textColor: "#ffb85c",
                 width: 400,

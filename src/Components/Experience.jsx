@@ -19,6 +19,8 @@ import { state } from "../../store";
 import { useSnapshot } from "valtio";
 import { FloorSocket } from "./LabScene/FloorSocket";
 import { WireExtension } from "./LabScene/WireExtension";
+import { Connected } from "./LabScene/Practicals/Connected";
+import { DisConnected } from "./LabScene/Practicals/DisConnected";
 
 const Experience = () => {
   const snap = useSnapshot(state);
@@ -37,6 +39,8 @@ const Experience = () => {
         <FloorSocket />
         <WireExtension />
         <Wall />
+        {/* Laptop Screens */}
+        {snap.internetConnection ? <Connected /> : <DisConnected />}
         {!snap.startTraining && snap.showManual && (
           <>
             {/* Iteractive 3d card where users will click to learn */}

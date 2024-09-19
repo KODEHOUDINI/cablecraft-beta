@@ -4,7 +4,7 @@
  */
 import { proxy, subscribe } from "valtio";
 
-const VERSION = "1.0"; // Increment this whenever you make significant changes
+const VERSION = "2.0"; // Increment this whenever you make significant changes
 
 const storedStateString =
   typeof window !== "undefined" && window?.localStorage.getItem("cablecraftReact");
@@ -29,6 +29,9 @@ if (storedStateString) {
       startOnboarding: false,
       equalArrays: false,
       colorScheme: "T568A",
+      showModal: false,
+      ethernetRest: [-0.27, 1.074, -9.73],
+      internetConnection: false,
       T568A: [
         "#04E730",
         "#ffffff",
@@ -128,7 +131,9 @@ if (storedStateString) {
     startOnboarding: false,
     equalArrays: false,
     colorScheme: "T568A",
+    showModal: false,
     ethernetRest: [-0.27, 1.074, -9.73],
+    internetConnection: false,
     T568A: [
       "#04E730",
       "#ffffff",

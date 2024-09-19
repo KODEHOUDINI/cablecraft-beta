@@ -15,6 +15,9 @@ export function AnimatedCrimp(props) {
     const handle1Action = actions["Handle1.001Action"];
     const handle2Action = actions["Handle2.001Action"];
 
+    // Remove previous event listener if necessary
+    crimpEmptyAction.getMixer().removeEventListener("finished");
+
     let hasReversed = false;
 
     // Play CrimpEmptyAction
@@ -22,6 +25,7 @@ export function AnimatedCrimp(props) {
     crimpEmptyAction.setLoop(THREE.LoopOnce);
     crimpEmptyAction.time = 0;
     crimpEmptyAction.paused = false;
+    crimpEmptyAction.timeScale = 1;
     crimpEmptyAction.play();
 
     // Listen for the end of the CrimpEmptyAction
@@ -47,11 +51,13 @@ export function AnimatedCrimp(props) {
         hasReversed = true; // Set flag to true
         // Reverse CrimpEmptyAction after 4 seconds
         setTimeout(() => {
+          handle1Action.paused = true;
+          handle2Action.paused = true;
           crimpEmptyAction.timeScale = -1; // Reverse the action
           crimpEmptyAction.paused = false; // Unpause to play in reverse
           crimpEmptyAction.setLoop(THREE.LoopOnce);
           crimpEmptyAction.play();
-        }, 3500);
+        }, 1500);
       }
     });
   }

@@ -1,10 +1,14 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MeshTransmissionMaterial, useGLTF } from "@react-three/drei";
 import { state } from "../../../../store";
 import { useSnapshot } from "valtio";
 import { useFrame } from "@react-three/fiber";
 import { easing } from "maath";
 
+const areArraysEqual = (arr1, arr2) => {
+  if (arr1.length !== arr2.length) return false;
+  return arr1.every((value, index) => value === arr2[index]);
+};
 export function PracticeModels(props) {
   const { nodes, materials } = useGLTF("/Models/LabScene/PracticalModels.glb");
 
@@ -48,88 +52,54 @@ export function PracticeModels(props) {
   const w8ref1 = useRef();
   const w8ref2 = useRef();
 
+  const wireRefs = [
+    [w1ref1, w1ref2],
+    [w2ref1, w2ref2],
+    [w3ref1, w3ref2],
+    [w4ref1, w4ref2],
+    [w5ref1, w5ref2],
+    [w6ref1, w6ref2],
+    [w7ref1, w7ref2],
+    [w8ref1, w8ref2],
+  ];
+
+  const [numcheck, setNumcheck] = useState(0);
+
+  useEffect(() => {
+    if (
+      ethernetRef.current.position.x == -0.359 &&
+      ethernetRef.current.position.y == 0.927 &&
+      ethernetRef.current.position.z == -9.758 &&
+      snap.playCrimpAnim == true
+    ) {
+      state.internetConnection = true;
+      state.showModal = true;
+    }
+
+    console.log(numcheck);
+  }, [numcheck]);
+
   useFrame((state, delta) => {
+    setNumcheck(ethernetRef.current.position.y);
     if (snap.startTraining == true && snap.playCrimpAnim == false) {
       easing.damp3(ethernetRef.current.position, [-0.16, 1.1, -8.94], 1.5);
       easing.damp3(ethernetRef.current.rotation, [Math.PI / 2, 0, 0], 1);
       easing.damp3(strainRef.current.scale, [0, 0, 0], 1);
+      easing.damp3(connectorRef.current.position, [0.25, 0.004, 0], 1);
+      easing.damp3(teethRef.current.position, [0.257, 0, 0], 1);
 
       // Scaling the wires
-      // W1
-      if (snap.groupActive === 1 && snap.playCrimpAnim == false) {
-        easing.damp3(w1ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w1ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w1ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w1ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
+      wireRefs.forEach((refPair, index) => {
+        const isActive = snap.groupActive === index + 1 && !snap.playCrimpAnim;
+        const scale = isActive ? [1.5, 1, 1] : [1, 1, 1];
 
-      // W2
-      if (snap.groupActive === 2 && snap.playCrimpAnim == false) {
-        easing.damp3(w2ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w2ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w2ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w2ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
-
-      // W3
-      if (snap.groupActive === 3 && snap.playCrimpAnim == false) {
-        easing.damp3(w3ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w3ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w3ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w3ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
-
-      // W4
-      if (snap.groupActive === 4 && snap.playCrimpAnim == false) {
-        easing.damp3(w4ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w4ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w4ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w4ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
-
-      // W5
-      if (snap.groupActive === 5 && snap.playCrimpAnim == false) {
-        easing.damp3(w5ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w5ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w5ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w5ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
-
-      // W6
-      if (snap.groupActive === 6 && snap.playCrimpAnim == false) {
-        easing.damp3(w6ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w6ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w6ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w6ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
-
-      // W7
-      if (snap.groupActive === 7 && snap.playCrimpAnim == false) {
-        easing.damp3(w7ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w7ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w7ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w7ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
-
-      // W8
-      if (snap.groupActive === 8 && snap.playCrimpAnim == false) {
-        easing.damp3(w8ref1.current.scale, [1.5, 1, 1], 0.5, delta);
-        easing.damp3(w8ref2.current.scale, [1.5, 1, 1], 0.5, delta);
-      } else {
-        easing.damp3(w8ref1.current.scale, [1, 1, 1], 0.5, delta);
-        easing.damp3(w8ref2.current.scale, [1, 1, 1], 0.5, delta);
-      }
+        refPair.forEach((ref) => {
+          easing.damp3(ref.current.scale, scale, 0.25, delta);
+        });
+      });
     } else if (snap.startTraining == true && snap.playCrimpAnim == true) {
       setTimeout(() => {
         easing.damp3(ethernetRef.current.position, snap.ethernetRest, 1);
-        // easing.damp3(ethernetRef.current.position, [-0.359, 0.927, -9.73], 1);
         easing.damp3(ethernetRef.current.rotation, [0, 0, 0], 1);
         easing.damp3(strainRef.current.scale, [1, 1, 1], 1);
         easing.damp3(strainRef.current.position, [0.208, 0.002, 0], 1);
@@ -139,37 +109,11 @@ export function PracticeModels(props) {
       easing.damp3(connectorRef.current.position, [0.225, 0.004, 0], 1);
       easing.damp3(teethRef.current.position, [0.232, 0, 0], 1);
 
-      // W1
-      easing.damp3(w1ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w1ref2.current.scale, [1, 1, 1], 0.2, delta);
-
-      // W2
-      easing.damp3(w2ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w2ref2.current.scale, [1, 1, 1], 0.2, delta);
-
-      // W3
-      easing.damp3(w3ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w3ref2.current.scale, [1, 1, 1], 0.2, delta);
-
-      // W4
-      easing.damp3(w4ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w4ref2.current.scale, [1, 1, 1], 0.2, delta);
-
-      // W5
-      easing.damp3(w5ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w5ref2.current.scale, [1, 1, 1], 0.2, delta);
-
-      // W6
-      easing.damp3(w6ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w6ref2.current.scale, [1, 1, 1], 0.2, delta);
-
-      // W7
-      easing.damp3(w7ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w7ref2.current.scale, [1, 1, 1], 0.2, delta);
-
-      // W8
-      easing.damp3(w8ref1.current.scale, [1, 1, 1], 0.2, delta);
-      easing.damp3(w8ref2.current.scale, [1, 1, 1], 0.2, delta);
+      wireRefs.forEach((refPair) => {
+        refPair.forEach((ref) => {
+          easing.damp3(ref.current.scale, [1, 1, 1], 0.2, delta);
+        });
+      });
     } else {
       easing.damp3(ethernetRef.current.position, [-0.389, 0.927, -9.758], 1);
       easing.damp3(strainRef.current.scale, [1, 1, 1], 1);
@@ -184,14 +128,13 @@ export function PracticeModels(props) {
         receiveShadow
         geometry={nodes.Practical_Animated_Cable.geometry}
         material={materials["Material.004"]}
-        position={[-0.389, 0.927, -9.758]} //starting position
+        position={[-0.369, 0.927, -9.758]} //starting position
         scale={1}
       >
         <mesh
           ref={connectorRef}
           geometry={nodes.Practical_RJ45.geometry}
           position={[0.25, 0.004, 0]}
-          // position={[0.225, 0.004, 0]} //Original Pos
           rotation={[1.567, -1.567, 1.571]}
         >
           <MeshTransmissionMaterial
@@ -203,17 +146,13 @@ export function PracticeModels(props) {
             distortion={2}
             distortionScale={2}
             transmission={0.7}
-            // toneMapped={true}
             color={"#ffffff"}
           />
         </mesh>
         <mesh
-          // visible={false}
           ref={teethRef}
           geometry={nodes.Practical_RJ45_Teeth.geometry}
-          // material={materials["copper.001"]}
           position={[0.257, 0, 0]}
-          // position={[0.232, 0, 0]} //Original Pos
           rotation={[-Math.PI / 2, 0, -Math.PI / 2]}
         >
           <meshStandardMaterial color={"#b87333"} metalness={1} roughness={0.1} />
@@ -230,9 +169,7 @@ export function PracticeModels(props) {
           receiveShadow
           geometry={nodes.Practical_Strain_Relief.geometry}
           ref={strainRef}
-          // material={materials["Practical yellow-plastic"]}
           position={[0.191, 0.002, 0]}
-          // position={[0.191, 0.002, 0]} //Original Pos
           rotation={[1.571, -1.567, 1.571]}
         >
           <meshStandardMaterial color={"#fff64f"} metalness={0.1} roughness={0.5} />

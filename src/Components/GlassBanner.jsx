@@ -21,7 +21,7 @@ const GlassBanner = () => {
       >
         <div className="flex flex-col items-center justify-center w-full h-[100%] overflow-hidden">
           <div className=" w-[70vw] select-none md:w-[50vw] font-bold">
-            <p className="font-sansita text-2xl text-center text-[#ffb54d] lg:text-[5rem] lg:mb-8">
+            <p className="font-sansita text-2xl text-center text-[#e2a856] lg:text-[5rem] lg:mb-8">
               CABLE-CRAFT
             </p>
             <p className="font-quicksand text-center text-white md:text-center text-sm md:text-xl">

@@ -143,6 +143,7 @@ const Tuts = () => {
   const hideManual = () => {
     state.startTraining = true;
     state.playCrimpAnim = false;
+    state.internetConnection = false;
   };
 
   const steps = [

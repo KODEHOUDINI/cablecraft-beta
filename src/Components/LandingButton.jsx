@@ -14,14 +14,8 @@ export default function LandingButton() {
   const mouseY = useMotionValue(0);
 
   const handlePlay = () => {
-    // state.enterLab = true;
     state.glassbgDisplay = false;
     state.targetPosZ = -9.829 - 5;
-    // state.introStart = false;
-    // state.reversePlayIntro = false;
-    // setTimeout(() => {
-    //   state.hideNav = true;
-    // }, 5000);
     setTimeout(() => {
       state.showManual = true;
     }, 2500);
