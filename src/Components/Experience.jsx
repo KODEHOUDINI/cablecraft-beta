@@ -24,7 +24,7 @@ const Experience = () => {
   const snap = useSnapshot(state);
   return (
     <>
-      <div className="absolute z-10 inset-x-[26rem] bottom-10">
+      <div className="absolute z-10 top-28 left-10">
         <ConfiguratorScreen />
       </div>
       <Canvas camera={{ fov: 35, near: 0.1, far: 1000, position: [0, 0, 5] }}>

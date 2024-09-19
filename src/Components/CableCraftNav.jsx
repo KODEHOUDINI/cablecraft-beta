@@ -102,39 +102,41 @@ const CableCraftNav = () => {
   }, []);
 
   return (
-    <Navbar
-      color="transparent"
-      className="mx-auto max-w-screen-[2000px] md:w-[80rem] px-6 py-3 inset-x-0 absolute z-50"
-    >
-      <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography
-          variant="h6"
-          color="white"
-          className="mr-4 cursor-pointer py-1.5 hover:text-[#dda15e]"
-          onClick={handlePlayReversal}
-        >
-          <img src="/cablecraft.svg" alt="" className="w-[7rem]" />
-        </Typography>
-        <div className="hidden lg:block">
-          <NavList />
+    <>
+      <Navbar
+        color="transparent"
+        className="mx-auto max-w-screen-[2000px] md:w-[80rem] px-6 py-3 inset-x-0 absolute z-50"
+      >
+        <div className="flex items-center justify-between text-blue-gray-900">
+          <Typography
+            variant="h6"
+            color="white"
+            className="mr-4 cursor-pointer py-1.5 hover:text-[#dda15e]"
+            onClick={handlePlayReversal}
+          >
+            <img src="/cablecraft.svg" alt="" className="w-[7rem]" />
+          </Typography>
+          <div className="hidden lg:block">
+            <NavList />
+          </div>
+          <IconButton
+            variant="text"
+            className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
+            ripple={false}
+            onClick={() => setOpenNav(!openNav)}
+          >
+            {openNav ? (
+              <HiOutlineX className="h-6 w-6" strokeWidth={3} color="white" />
+            ) : (
+              <HiMenu className="h-6 w-6" strokeWidth={1} color="white" />
+            )}
+          </IconButton>
         </div>
-        <IconButton
-          variant="text"
-          className="ml-auto h-6 w-6 text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
-          ripple={false}
-          onClick={() => setOpenNav(!openNav)}
-        >
-          {openNav ? (
-            <HiOutlineX className="h-6 w-6" strokeWidth={3} color="white" />
-          ) : (
-            <HiMenu className="h-6 w-6" strokeWidth={1} color="white" />
-          )}
-        </IconButton>
-      </div>
-      <Collapse open={openNav}>
-        <NavList />
-      </Collapse>
-    </Navbar>
+        <Collapse open={openNav}>
+          <NavList />
+        </Collapse>
+      </Navbar>
+    </>
   );
 };
 

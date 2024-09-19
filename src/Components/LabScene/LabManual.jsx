@@ -7,6 +7,7 @@ import { useFrame } from "@react-three/fiber";
 import { crimpingJourney } from "./Descriptions/Tuts";
 import { easing } from "maath";
 import { state } from "../../../store";
+import Joyride from "react-joyride";
 
 export function LabManual(props) {
   const { nodes } = useGLTF("/Models/LabScene/Manual.glb");
@@ -61,6 +62,7 @@ const handlePlayReversal = () => {
 const Intro = () => {
   const handleIntro = () => {
     state.hideLabIntro = true;
+    state.startOnboarding = true;
   };
   return (
     <>
@@ -88,7 +90,7 @@ const Intro = () => {
               </div>
             </div>
           </div>
-          <p className="blueberry font-[400] text-white text-[1.5rem] text-justify overflow-hidden h-full">
+          <p className="blueberry  font-[400] text-white text-[1.5rem] text-justify overflow-hidden h-full">
             Crimping might sound like a complex term, but it's actually a straightforward and
             essential process in making reliable network cables. Whether you're setting up a home
             network or working on a larger project, understanding the tools involved can make your
@@ -102,7 +104,7 @@ const Intro = () => {
             <p>
               <button
                 onClick={handleIntro}
-                className="relative flex text-white h-10 w-40 items-center justify-center rounded bg-[#f4a318] duration-300 [box-shadow:2px_2px_0px_2px] active:translate-x-0.5 active:translate-y-0.5 active:[box-shadow:-1px_1px_0px_1px]"
+                className="relative flex  text-white h-10 w-40 items-center justify-center rounded bg-[#f4a318] duration-300 [box-shadow:2px_2px_0px_2px] active:translate-x-0.5 active:translate-y-0.5 active:[box-shadow:-1px_1px_0px_1px]"
               >
                 Get Started
               </button>
@@ -143,16 +145,28 @@ const Tuts = () => {
     state.playCrimpAnim = false;
   };
 
+  const steps = [
+    {
+      target: ".first-step",
+      content: "This is my awesome feature!",
+    },
+    {
+      target: ".other-step",
+      content: "This another awesome feature!",
+    },
+  ];
+
   return (
     <>
       <Html distanceFactor={0.5} center>
-        <div className=" scale-[0.9] text-sm bg-opacity-0 md:w-[70vw] md:h-[66vh] px-10 py-1 flex flex-col items-center justify-start gap-2 relative overflow-hidden">
+        <div className="scale-[0.9] text-sm bg-opacity-0 md:w-[70vw] md:h-[66vh] px-10 py-1 flex flex-col items-center justify-start gap-2 relative overflow-hidden">
           <div className="flex w-full justify-between">
             <div
               onClick={handlePlayReversal}
-              className="cursor-pointer group relative bg-white p-2 rounded-full"
+              className="cursor-pointer  group relative bg-white p-2 rounded-full"
             >
-              <IoHome />
+              <IoHome className="z-10" />
+
               <div className="bg-zinc-800 p-2 rounded-md group-hover:flex hidden absolute top-1/2 -translate-y-1/2 -right-2 translate-x-full">
                 <span className="text-zinc-400 whitespace-nowrap">Homepage</span>
               </div>
@@ -193,6 +207,14 @@ const Tuts = () => {
                 </span>
               </button>
             </p>
+            {mySnap.currentToolIndex == 14 && (
+              <button
+                onClick={hideManual}
+                className="relative text-lg font-bold p-2  h-10 items-center justify-center text-white rounded-md bg-[#f4a318] duration-300 [box-shadow:2px_2px_0px_2px] active:translate-x-0.5 active:translate-y-0.5 active:[box-shadow:1px_1px_0px_1px]"
+              >
+                Practice
+              </button>
+            )}
             <p className="lg:inline-flex items-center gap-3 cursor-pointer py-2 px-4 text-sm font-semibold rounded-full butn">
               <button
                 onClick={nextItem}

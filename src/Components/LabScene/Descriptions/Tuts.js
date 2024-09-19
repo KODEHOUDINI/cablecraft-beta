@@ -114,7 +114,7 @@ export const crimpingJourney = [
   {
     name: "Well Done Crafter!!",
     description:
-      "You are now ready to have your practical experience, proceed to practice by clicking on the icon on the right",
+      "You are now ready to have your practical experience, proceed to practice by clicking practice button below",
     function: "",
   },
 ];

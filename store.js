@@ -26,6 +26,8 @@ if (storedStateString) {
       playCrimpAnim: false,
       glassbgDisplay: true,
       showManual: false,
+      startOnboarding: false,
+      equalArrays: false,
       colorScheme: "T568A",
       T568A: [
         "#04E730",
@@ -123,6 +125,8 @@ if (storedStateString) {
     playCrimpAnim: false,
     glassbgDisplay: true,
     showManual: false,
+    startOnboarding: false,
+    equalArrays: false,
     colorScheme: "T568A",
     ethernetRest: [-0.27, 1.074, -9.73],
     T568A: [
