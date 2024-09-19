@@ -75,8 +75,6 @@ export function PracticeModels(props) {
       state.internetConnection = true;
       state.showModal = true;
     }
-
-    console.log(numcheck);
   }, [numcheck]);
 
   useFrame((state, delta) => {

@@ -33,7 +33,6 @@ export function AnimatedCrimp(props) {
       // Pause CrimpEmptyAction on last frame
       crimpEmptyAction.paused = true;
       state.ethernetRest = [-0.359, 0.927, -9.758];
-      console.log("Done animating");
 
       // Play Handle1.001Action and Handle2.001Action simultaneously
       handle1Action.clampWhenFinished = true;
