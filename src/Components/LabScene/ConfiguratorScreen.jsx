@@ -105,15 +105,20 @@ const ConfiguratorScreen = () => {
   const crimp = () => {
     state.playCrimpAnim = true;
     state.equalArrays = false;
-    // setTimeout(() => {
-    //   state.playCrimpAnim = false;
-    // }, 5000);
   };
 
   // Reset Colors
   const resetColors = () => {
     state.storedUserColors = snap.resetUserColors;
     state.groupActive = 0;
+  };
+
+  const handleHelp = () => {
+    state.help = true;
+  };
+
+  const cancelHelp = () => {
+    state.help = false;
   };
 
   const steps = [
@@ -159,6 +164,23 @@ const ConfiguratorScreen = () => {
     },
   ];
 
+  const T568AColors = [];
+  const T568BColors = [];
+
+  // Grouping the colors into objects
+  for (let i = 0; i < snap.T568A.length; i += 2) {
+    T568AColors.push({
+      solid: snap.T568A[i],
+      striped: snap.T568A[i + 1],
+    });
+  }
+  for (let i = 0; i < snap.T568B.length; i += 2) {
+    T568BColors.push({
+      solid: snap.T568B[i],
+      striped: snap.T568B[i + 1],
+    });
+  }
+
   return (
     <>
       {snap.startTraining && (
@@ -186,28 +208,30 @@ const ConfiguratorScreen = () => {
               },
             }}
           />
+
           <Draggable>
             <div className="flex flex-col config-tour justify-between items-center w-[30rem] config">
               <div className="flex color-scheme flex-col items-center">
-                <p className="text-[#ffb85c]">Choose Color Scheme (Defaults to T568A)</p>
+                <h4 className="text-[#ffb85c] text-lg font-bold">Choose Color Scheme</h4>
                 <div>
                   <label className="cursor-pointer mx-2">
                     <input
                       type="radio"
                       name="color scheme"
                       onClick={colorSchemeA}
-                      className="cursor-pointer"
+                      className="cursor-pointer accent-orange-400"
+                      defaultChecked
                     />
-                    <span className="ml-1 text-[#ffb85c]">T568A</span>
+                    <span className="ml-1 text-lg  font-bold text-[#ffb85c]">T568A</span>
                   </label>
                   <label className="cursor-pointer mx-2">
                     <input
                       type="radio"
                       name="color scheme"
                       onClick={colorSchemeB}
-                      className="cursor-pointer"
+                      className="cursor-pointer accent-orange-400"
                     />
-                    <span className="ml-1 text-[#ffb85c]">T568B</span>
+                    <span className="ml-1 text-lg font-bold text-[#ffb85c]">T568B</span>
                   </label>
                 </div>
               </div>
@@ -276,83 +300,20 @@ const ConfiguratorScreen = () => {
                 </div>
               </div>
               {/* Colors */}
-              <div className="flex color-selection bg-[#bebebe] rounded-[0.5rem] justify-between align-middle p-3  ">
-                {/* B1 */}
-
-                {/* B2 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[0].solid} 50%, ${snap.colors[0].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer "
-                  onClick={() => handleColorChange(0)}
-                ></div>
-
-                {/* B3 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[1].solid} 50%, ${snap.colors[1].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
-                  onClick={() => handleColorChange(1)}
-                ></div>
-
-                {/* B4 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[2].solid} 50%, ${snap.colors[2].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
-                  onClick={() => handleColorChange(2)}
-                ></div>
-
-                {/* B5 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[3].solid} 50%, ${snap.colors[3].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
-                  onClick={() => handleColorChange(3)}
-                ></div>
-
-                {/* B6 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[4].solid} 50%, ${snap.colors[4].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
-                  onClick={() => handleColorChange(4)}
-                ></div>
-
-                {/* B7 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[5].solid} 50%, ${snap.colors[5].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
-                  onClick={() => handleColorChange(5)}
-                ></div>
-
-                {/* B8 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[6].solid} 50%, ${snap.colors[6].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
-                  onClick={() => handleColorChange(6)}
-                ></div>
-
-                {/* B9 */}
-                <div
-                  style={{
-                    background: `linear-gradient(to bottom, ${snap.colors[7].solid} 50%, ${snap.colors[7].striped} 50%)`,
-                  }}
-                  className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
-                  onClick={() => handleColorChange(7)}
-                ></div>
+              <div className="flex color-selection bg-[#bebebe] rounded-[0.5rem] justify-between align-middle p-3">
+                {snap.colors.map((color, index) => (
+                  <div
+                    key={index}
+                    style={{
+                      background: `linear-gradient(to bottom, ${color.solid} 50%, ${color.striped} 50%)`,
+                    }}
+                    className="mx-3 w-6 h-6 rounded-full hover:cursor-pointer"
+                    onClick={() => handleColorChange(index)}
+                  ></div>
+                ))}
               </div>
               {/* Crimp Button */}
-              <div className="flex justify-between items-center  w-[15rem]">
+              <div className="flex justify-between items-center  w-[24rem]">
                 <Button
                   size="sm"
                   className="bg-[#ffa733] h-9 reset-color-selection"
@@ -371,9 +332,63 @@ const ConfiguratorScreen = () => {
                     color={`${snap.equalArrays ? "#ffa733" : "#afafaf"}`}
                   />
                 </div>
+                <Button
+                  size="sm"
+                  className="bg-[#ffa733] h-9 reset-color-selection"
+                  onClick={handleHelp}
+                >
+                  Need Help ?
+                </Button>
               </div>
             </div>
           </Draggable>
+
+          {snap.help && (
+            <Draggable>
+              <div className="flex flex-col justify-between items-center w-[30rem] config">
+                {/* Close Button */}
+                <div className="w-[28rem] flex justify-end">
+                  <div
+                    onClick={cancelHelp}
+                    className="text-white rounded-full cursor-pointer hover:bg-orange-400 w-6 h-6 text-center bg-red-500 "
+                  >
+                    X
+                  </div>
+                </div>
+                {/* Colors Coding for T568A */}
+                <h4 className="text-[#ffb85c] underline text-lg font-bold">
+                  T568A Color Code Reference
+                </h4>
+                <div className="flex  bg-[#bebebe] rounded-[0.5rem] justify-between align-middle p-3">
+                  {T568AColors.map((color, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        background: `linear-gradient(to bottom, ${color.solid} 50%, ${color.striped} 50%)`,
+                      }}
+                      className="mx-3 w-6 h-6 rounded-full"
+                    ></div>
+                  ))}
+                </div>
+
+                {/* Colors Coding for T568B */}
+                <h4 className="text-[#ffb85c] underline text-lg mt-5 font-bold">
+                  T568B Color Code Reference
+                </h4>
+                <div className="flex  bg-[#bebebe] rounded-[0.5rem] mb-4 justify-between align-middle p-3">
+                  {T568BColors.map((color, index) => (
+                    <div
+                      key={index}
+                      style={{
+                        background: `linear-gradient(to bottom, ${color.solid} 50%, ${color.striped} 50%)`,
+                      }}
+                      className="mx-3 w-6 h-6 rounded-full"
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </Draggable>
+          )}
         </>
       )}
     </>

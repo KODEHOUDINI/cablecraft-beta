@@ -12,6 +12,7 @@ const handlePlayReversal = () => {
   (state.showModal = false), (state.groupActive = 1);
   state.currentToolIndex = 0;
   state.startTraining = false;
+  state.help = false;
   state.playCrimpAnim = false;
   state.equalArrays = false;
   state.internetConnection = false;
@@ -24,6 +25,7 @@ const handleTutorials = () => {
   state.targetPosZ = -9.829 - 5;
   state.currentToolIndex = 0;
   state.startTraining = false;
+  state.help = false;
   state.playCrimpAnim = false;
   state.equalArrays = false;
   (state.showModal = false), (state.internetConnection = false);
@@ -39,6 +41,7 @@ const handlePractice = () => {
   state.targetPosZ = -9.829 - 5;
   state.groupActive = 1;
   state.currentToolIndex = 0;
+  state.help = false;
   state.startTraining = true;
   state.playCrimpAnim = false;
   state.showManual = false;
@@ -52,6 +55,7 @@ const handleColorCode = () => {
   state.glassbgDisplay = false;
   state.targetPosZ = -9.829 - 5;
   state.currentToolIndex = 12;
+  state.help = false;
   state.startTraining = false;
   state.playCrimpAnim = false;
   state.equalArrays = false;
