@@ -4,8 +4,8 @@ const EthernetSvg = ({ size, color }) => {
   return (
     <>
       <svg
-        className="rotate-90 fill-blue-gray-300"
-        // fill={color}
+        className="rotate-90 "
+        fill={color}
         height={size}
         width={size}
         version="1.1"

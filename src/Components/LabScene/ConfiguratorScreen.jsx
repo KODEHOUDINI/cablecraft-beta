@@ -188,11 +188,6 @@ const ConfiguratorScreen = () => {
           />
           <Draggable>
             <div className="flex flex-col config-tour justify-between items-center w-[30rem] config">
-              {/* <div className="config-tour absolute w-[30rem] h-[15rem] bg-[#ff0000] -z-50">
-                {" "}
-                hello
-              </div> */}
-              {/* Color Scheme */}
               <div className="flex color-scheme flex-col items-center">
                 <p className="text-[#ffb85c]">Choose Color Scheme (Defaults to T568A)</p>
                 <div>
@@ -366,9 +361,9 @@ const ConfiguratorScreen = () => {
                   Reset Colors
                 </Button>
                 <div
-                  onClick={crimp}
-                  className={`crimp-action hover:cursor-pointer ${
-                    snap.equalArrays ? "animate-bounce" : ""
+                  onClick={snap.equalArrays && crimp}
+                  className={`crimp-action cursor-not-allowed ${
+                    snap.equalArrays ? "animate-bounce hover:cursor-pointer" : ""
                   }`}
                 >
                   <EthernetSvg
