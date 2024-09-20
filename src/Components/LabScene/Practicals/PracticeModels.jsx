@@ -73,7 +73,10 @@ export function PracticeModels(props) {
       snap.playCrimpAnim == true
     ) {
       state.internetConnection = true;
-      state.showModal = true;
+
+      setTimeout(() => {
+        state.showModal = true;
+      }, 3000);
     }
   }, [numcheck]);
 

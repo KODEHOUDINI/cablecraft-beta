@@ -211,8 +211,8 @@ const ConfiguratorScreen = () => {
 
           <Draggable>
             <div className="flex flex-col config-tour justify-between items-center w-[30rem] config">
-              <div className="flex color-scheme flex-col items-center">
-                <h4 className="text-[#ffb85c] text-lg font-bold">Choose Color Scheme</h4>
+              <div className="flex flex-col color-scheme items-center">
+                <h4 className="text-[#ffb85c] text-lg font-bold">Choose Color Scheme: </h4>
                 <div>
                   <label className="cursor-pointer mx-2">
                     <input
@@ -222,7 +222,7 @@ const ConfiguratorScreen = () => {
                       className="cursor-pointer accent-orange-400"
                       defaultChecked
                     />
-                    <span className="ml-1 text-lg  font-bold text-[#ffb85c]">T568A</span>
+                    <span className="ml-1 text-lg font-bold text-[#ffb85c]">T568A</span>
                   </label>
                   <label className="cursor-pointer mx-2">
                     <input
@@ -245,7 +245,7 @@ const ConfiguratorScreen = () => {
                   >
                     <div
                       onClick={prevActiveGroup}
-                      className="bg-green-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500"
+                      className="bg-orange-400 rounded-xl h-12 w-1/4 flex items-center justify-center absolute left-1 top-[4px] group-hover:w-[184px] z-10 duration-500"
                     >
                       <svg
                         width="25px"
@@ -254,11 +254,11 @@ const ConfiguratorScreen = () => {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          fill="#000000"
+                          fill="#fff"
                           d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
                         ></path>
                         <path
-                          fill="#000000"
+                          fill="#fff"
                           d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
                         ></path>
                       </svg>
@@ -277,7 +277,7 @@ const ConfiguratorScreen = () => {
                   >
                     <div
                       onClick={nextActiveGroup}
-                      className="bg-green-400 rounded-xl rotate-180 h-12 w-1/4 flex items-center justify-center absolute right-1 top-[4px] group-hover:w-[184px] z-10 duration-500"
+                      className="bg-orange-400 rounded-xl rotate-180 h-12 w-1/4 flex items-center justify-center absolute right-1 top-[4px] group-hover:w-[184px] z-10 duration-500"
                     >
                       <svg
                         width="25px"
@@ -286,11 +286,11 @@ const ConfiguratorScreen = () => {
                         xmlns="http://www.w3.org/2000/svg"
                       >
                         <path
-                          fill="#000000"
+                          fill="#fff"
                           d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"
                         ></path>
                         <path
-                          fill="#000000"
+                          fill="#fff"
                           d="m237.248 512 265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"
                         ></path>
                       </svg>

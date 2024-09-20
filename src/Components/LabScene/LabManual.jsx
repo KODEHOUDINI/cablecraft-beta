@@ -79,8 +79,8 @@ const Intro = () => {
                 <div className="bg-inherit rotate-45 p-1 absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2"></div>
               </div>
             </div>
-            <p className="cardtxt font-semibold text-[2rem] text-white tracking-wider  text-xl">
-              Welcome to Cable Craft!
+            <p className="cardtxt font-semibold text-[2.2rem] underline text-white tracking-wider  text-xl">
+              Welcome to Cable-Craft!
             </p>
             <div className="cursor-pointer group relative bg-white p-2 rounded-full">
               <BsEthernet />
@@ -90,7 +90,7 @@ const Intro = () => {
               </div>
             </div>
           </div>
-          <p className="blueberry  font-[400] text-white text-[1.5rem] text-justify overflow-hidden h-full">
+          <p className="blueberry  font-[600] font-quicksand text-white text-[1.5rem] text-justify overflow-hidden h-full">
             Crimping might sound like a complex term, but it's actually a straightforward and
             essential process in making reliable network cables. Whether you're setting up a home
             network or working on a larger project, understanding the tools involved can make your
