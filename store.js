@@ -4,7 +4,7 @@
  */
 import { proxy, subscribe } from "valtio";
 
-const VERSION = "6.0"; // Increment this whenever you make significant changes
+const VERSION = "8.0"; // Increment this whenever you make significant changes
 
 const storedStateString =
   typeof window !== "undefined" && window?.localStorage.getItem("cablecraftReact");
