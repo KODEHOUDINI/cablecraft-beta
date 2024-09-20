@@ -65,7 +65,7 @@ export default function LandingButton() {
         >
           <div className="container">
             {/* <Suspense fallback={null}>
-              <Shapes isHover={isHover} isPress={isPress} mouseX={mouseX} mouseY={mouseY} />
+            <Shapes isHover={isHover} isPress={isPress} mouseX={mouseX} mouseY={mouseY} />
             </Suspense> */}
           </div>
         </motion.div>

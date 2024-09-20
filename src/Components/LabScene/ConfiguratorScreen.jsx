@@ -69,6 +69,16 @@ const ConfiguratorScreen = () => {
 
   useEffect(() => {
     if (snap.colorScheme == "T568A") {
+      if (snap.storedUserColors[15] !== "#fff" || snap.storedUserColors[5] !== "#fff") {
+        if (
+          snap.T568A[15] !== snap.storedUserColors[15] ||
+          snap.T568A[5] !== snap.storedUserColors[5]
+        ) {
+          toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
+            duration: 4000,
+          });
+        }
+      }
       if (areArraysEqual(snap.T568A, snap.storedUserColors)) {
         toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",
@@ -77,6 +87,16 @@ const ConfiguratorScreen = () => {
         state.equalArrays = true;
       }
     } else if (snap.colorScheme == "T568B") {
+      if (snap.storedUserColors[15] !== "#fff" || snap.storedUserColors[5] !== "#fff") {
+        if (
+          snap.T568B[15] !== snap.storedUserColors[15] ||
+          snap.T568B[5] !== snap.storedUserColors[5]
+        ) {
+          toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
+            duration: 4000,
+          });
+        }
+      }
       if (areArraysEqual(snap.T568B, snap.storedUserColors)) {
         toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",

@@ -1,15 +1,23 @@
-import { MotionConfig } from "framer-motion";
-// import { motion } from "framer-motion-3d";
+import { MotionConfig, useSpring, useTransform } from "framer-motion";
+import { motion } from "framer-motion-3d";
 import { useRef, useLayoutEffect } from "react";
 import { Canvas, useThree } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
-
 import { Cutter } from "./LandingButtonModels/Cutter";
 import { Connector } from "./LandingButtonModels/Connector";
-import { useSmoothTransform } from "../../utils/use-smooth-transform";
-import { transition } from "../../utils/settings";
 import { Cable } from "./LandingButtonModels/Cable";
 import { CrimpTool } from "./LandingButtonModels/CrimpTool";
+
+const useSmoothTransform = (value, springOptions, transformer) => {
+  const transformedValue = useTransform(value, transformer);
+  return useSpring(transformedValue, springOptions);
+};
+
+const transition = {
+  type: "spring",
+  duration: 0.7,
+  bounce: 0.2,
+};
 
 export function Shapes({ isHover, isPress, mouseX, mouseY }) {
   return (
@@ -138,7 +146,13 @@ function Camera({ mouseX, mouseY, ...props }) {
     return cameraX.on("change", () => camera.lookAt(scene.position));
   }, [cameraX]);
 
-  return <motion.perspectiveCamera ref={cameraRef} fov={90} position={[cameraX, cameraY, 3.8]} />;
+  return (
+    <motion.perspectiveCamera
+      ref={cameraRef}
+      fov={90}
+      position={[cameraX.get(), cameraY.get(), 3.8]}
+    />
+  );
 }
 
 const spring = { stiffness: 600, damping: 30 };
