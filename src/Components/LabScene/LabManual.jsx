@@ -79,7 +79,7 @@ const Intro = () => {
                 <div className="bg-inherit rotate-45 p-1 absolute top-1/2 -translate-y-1/2 left-0 -translate-x-1/2"></div>
               </div>
             </div>
-            <p className="cardtxt font-semibold text-[2.2rem] underline text-white tracking-wider  text-xl">
+            <p className="cardtxt font-semibold text-[2.5rem] underline text-white tracking-wider  text-xl">
               Welcome to Cable-Craft!
             </p>
             <div className="cursor-pointer group relative bg-white p-2 rounded-full">
@@ -172,7 +172,7 @@ const Tuts = () => {
                 <span className="text-zinc-400 whitespace-nowrap">Homepage</span>
               </div>
             </div>
-            <p className="cardtxt font-semibold text-[2.3rem] text-white tracking-wider  text-xl">
+            <p className="cardtxt font-semibold text-[2.5rem] text-white tracking-wider  text-xl">
               {currentItem.name}
             </p>
             <div

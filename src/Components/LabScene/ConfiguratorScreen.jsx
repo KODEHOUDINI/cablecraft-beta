@@ -69,16 +69,35 @@ const ConfiguratorScreen = () => {
 
   useEffect(() => {
     if (snap.colorScheme == "T568A") {
-      // if (snap.storedUserColors[14] !== "#fff" || snap.storedUserColors[4] !== "#fff") {
-      //   if (
-      //     snap.T568A[14] !== snap.storedUserColors[14] ||
-      //     snap.T568A[4] !== snap.storedUserColors[4]
-      //   ) {
-      //     toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
-      //       duration: 4000,
-      //     });
-      //   }
-      // }
+      if (snap.groupActive === 3) {
+        if (snap.storedUserColors[4] !== "#fff") {
+          if (snap.T568A[4] !== snap.storedUserColors[4]) {
+            toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
+              duration: 4000,
+            });
+          } else {
+            toast("Nice work! Keep going", {
+              icon: "✅",
+              duration: 4000,
+            });
+          }
+        }
+      }
+      if (snap.groupActive === 6) {
+        if (snap.storedUserColors[10] !== "#fff") {
+          if (snap.T568A[10] !== snap.storedUserColors[10]) {
+            toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
+              duration: 4000,
+            });
+          } else {
+            toast("Wow! You're doing great", {
+              icon: "✅🔥🔥",
+              duration: 4000,
+            });
+          }
+        }
+      }
+      // Well Done Message
       if (areArraysEqual(snap.T568A, snap.storedUserColors)) {
         toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",
@@ -87,16 +106,36 @@ const ConfiguratorScreen = () => {
         state.equalArrays = true;
       }
     } else if (snap.colorScheme == "T568B") {
-      // if (snap.storedUserColors[14] !== "#fff" || snap.storedUserColors[4] !== "#fff") {
-      //   if (
-      //     snap.T568B[14] !== snap.storedUserColors[14] ||
-      //     snap.T568B[4] !== snap.storedUserColors[4]
-      //   ) {
-      //     toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
-      //       duration: 4000,
-      //     });
-      //   }
-      // }
+      if (snap.groupActive === 3) {
+        if (snap.storedUserColors[4] !== "#fff") {
+          if (snap.T568B[4] !== snap.storedUserColors[4]) {
+            toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
+              duration: 4000,
+            });
+          } else {
+            toast("Nice work! Keep going", {
+              icon: "✅",
+              duration: 4000,
+            });
+          }
+        }
+      }
+      if (snap.groupActive === 6) {
+        if (snap.storedUserColors[10] !== "#fff") {
+          if (snap.T568B[10] !== snap.storedUserColors[10]) {
+            toast.error("Oops! Incorrect Color Coding. Click the help button for assistance", {
+              duration: 4000,
+            });
+          } else {
+            toast("Wow! You're doing great", {
+              icon: "✅🔥🔥",
+              duration: 4000,
+            });
+          }
+        }
+      }
+
+      // Sucess Message
       if (areArraysEqual(snap.T568B, snap.storedUserColors)) {
         toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",

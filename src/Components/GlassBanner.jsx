@@ -26,9 +26,9 @@ const GlassBanner = () => {
             </p>
             <p className="font-quicksand text-center text-white md:text-center text-sm md:text-xl">
               Step into the world of network crimping excellence with CableCraft, your trusted
-              companion on the path to mastering the intricacies of Ethernet cables. As a network
-              scholar, you understand the significance of precise crimping techniques in achieving
-              seamless data transmission and network reliability.
+              companion on the path to mastering the intricacies of Ethernet cable crimping. As a
+              network scholar, you need to understand the significance of precise crimping
+              techniques in achieving seamless data transmission and network reliability.
             </p>
           </div>
           <div className="text-center mt-10">
