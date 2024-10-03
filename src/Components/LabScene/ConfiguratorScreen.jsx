@@ -469,10 +469,14 @@ const ConfiguratorScreen = () => {
           </Draggable>
 
           <Draggable>
-            <div className="w-[10rem] absolute bottom-[15rem] left-[42rem] Lconfig">
+            <div className="w-[18rem] absolute bottom-[15rem] left-[42rem] Lconfig">
               <h1 className="text-white bg-[#bebebe] rounded-md p-2 text-5xl text-center font-bold">
                 Level {snap?.level}
               </h1>
+              <p className="text-center text-lg p-1">
+                Wires are wrongly configured using your knowledge from the tutorials, configure them
+                correctly
+              </p>
             </div>
           </Draggable>
 
