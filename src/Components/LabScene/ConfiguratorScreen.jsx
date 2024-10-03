@@ -469,7 +469,7 @@ const ConfiguratorScreen = () => {
           </Draggable>
 
           <Draggable>
-            <div className="w-[18rem] absolute bottom-[15rem] left-[42rem] Lconfig">
+            <div className="w-[18rem] absolute bottom-[15rem] left-[36rem] Lconfig">
               <h1 className="text-white bg-[#bebebe] rounded-md p-2 text-5xl text-center font-bold">
                 Level {snap?.level}
               </h1>
