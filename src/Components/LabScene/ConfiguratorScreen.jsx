@@ -6,11 +6,28 @@ import { state } from "../../../store";
 import Joyride from "react-joyride";
 import EthernetSvg from "./EthernetSvg";
 
-import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 
 const ConfiguratorScreen = () => {
   const snap = useSnapshot(state);
   const [selectedColorIndex, setSelectedColorIndex] = useState(snap.colorIndex);
+
+  useEffect(() => {
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        break;
+      }
+    }
+  }, [snap.level]);
 
   const handleColorChange = (index) => {
     setSelectedColorIndex(index);
@@ -98,7 +115,20 @@ const ConfiguratorScreen = () => {
         }
       }
       // Well Done Message
-      if (areArraysEqual(snap.T568A, snap.storedUserColors)) {
+      if (areArraysEqual(snap.T568A, snap.storedUserColors) && snap.level < 3) {
+        toast("Great Work Crafter! Practice makes perfect.Moving on to the next level", {
+          icon: "👏",
+          duration: 4000,
+        });
+        // state.equalArrays = true;
+        if (snap.level == 1) {
+          state.level = 2;
+          state.groupActive = 1;
+        } else if (snap.level == 2) {
+          state.level = 3;
+          state.groupActive = 1;
+        }
+      } else if (areArraysEqual(snap.T568A, snap.storedUserColors) && snap.level == 3) {
         toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",
           duration: 4000,
@@ -136,7 +166,20 @@ const ConfiguratorScreen = () => {
       }
 
       // Sucess Message
-      if (areArraysEqual(snap.T568B, snap.storedUserColors)) {
+      if (areArraysEqual(snap.T568B, snap.storedUserColors) && snap.level < 3) {
+        toast("Great Work Crafter! Practice makes perfect. Moving on to the next level", {
+          icon: "👏",
+          duration: 4000,
+        });
+        // state.equalArrays = true;
+        if (snap.level == 1) {
+          state.level = 2;
+          state.groupActive = 1;
+        } else if (snap.level == 2) {
+          state.level = 3;
+          state.groupActive = 1;
+        }
+      } else if (areArraysEqual(snap.T568B, snap.storedUserColors) && snap.level == 3) {
         toast("Great Work Crafter! You can now use the Crimper", {
           icon: "👏",
           duration: 4000,
@@ -156,9 +199,13 @@ const ConfiguratorScreen = () => {
 
   const colorSchemeA = () => {
     state.colorScheme = "T568A";
+    state.level = 1;
+    state.groupActive = 1;
   };
   const colorSchemeB = () => {
     state.colorScheme = "T568B";
+    state.level = 1;
+    state.groupActive = 1;
   };
 
   const crimp = () => {
@@ -168,8 +215,24 @@ const ConfiguratorScreen = () => {
 
   // Reset Colors
   const resetColors = () => {
-    state.storedUserColors = snap.resetUserColors;
-    state.groupActive = 0;
+    // state.storedUserColors = snap.resetUserColors;
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
   };
 
   const handleHelp = () => {
@@ -271,6 +334,9 @@ const ConfiguratorScreen = () => {
           <Draggable>
             <div className="flex flex-col config-tour justify-between items-center w-[30rem] config">
               <div className="flex flex-col color-scheme items-center">
+                <h4 className="text-white bg-[#bebebe] rounded-md p-2 text-lg font-bold">
+                  Practice Mode (Level {snap?.level} of 3){" "}
+                </h4>
                 <h4 className="text-[#ffb85c] text-lg font-bold">Choose Color Scheme: </h4>
                 <div>
                   <label className="cursor-pointer mx-2">
@@ -383,7 +449,7 @@ const ConfiguratorScreen = () => {
                 <div
                   onClick={snap.equalArrays && crimp}
                   className={`crimp-action cursor-not-allowed ${
-                    snap.equalArrays ? "animate-bounce hover:cursor-pointer" : ""
+                    snap.equalArrays && snap.level == 3 ? "animate-bounce hover:cursor-pointer" : ""
                   }`}
                 >
                   <EthernetSvg
@@ -399,6 +465,14 @@ const ConfiguratorScreen = () => {
                   Need Help ?
                 </Button>
               </div>
+            </div>
+          </Draggable>
+
+          <Draggable>
+            <div className="w-[10rem] absolute bottom-[15rem] left-[42rem] Lconfig">
+              <h1 className="text-white bg-[#bebebe] rounded-md p-2 text-5xl text-center font-bold">
+                Level {snap?.level}
+              </h1>
             </div>
           </Draggable>
 

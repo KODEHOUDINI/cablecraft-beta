@@ -5,68 +5,136 @@ import { Button, Dialog, DialogBody, DialogFooter, DialogHeader } from "@materia
 import { state } from "../../store";
 import { useSnapshot } from "valtio";
 
-const handlePlayReversal = () => {
-  state.glassbgDisplay = true;
-  state.targetPosZ = -10.829 + 0.4;
-  state.showManual = false;
-  (state.showModal = false), (state.groupActive = 1);
-  state.currentToolIndex = 0;
-  state.startTraining = false;
-  state.help = false;
-  state.playCrimpAnim = false;
-  state.equalArrays = false;
-  state.internetConnection = false;
-  state.ethernetRest = [-0.27, 1.074, -9.73];
-  state.storedUserColors = state.resetUserColors;
-};
-
-const handleTutorials = () => {
-  state.glassbgDisplay = false;
-  state.targetPosZ = -9.829 - 5;
-  state.currentToolIndex = 0;
-  state.startTraining = false;
-  state.help = false;
-  state.playCrimpAnim = false;
-  state.equalArrays = false;
-  (state.showModal = false), (state.internetConnection = false);
-  state.storedUserColors = state.resetUserColors;
-  state.ethernetRest = [-0.27, 1.074, -9.73];
-  setTimeout(() => {
-    state.showManual = true;
-  }, 1000);
-};
-
-const handlePractice = () => {
-  state.glassbgDisplay = false;
-  state.targetPosZ = -9.829 - 5;
-  state.groupActive = 1;
-  state.currentToolIndex = 0;
-  state.help = false;
-  state.startTraining = true;
-  state.playCrimpAnim = false;
-  state.showManual = false;
-  state.equalArrays = false;
-  state.internetConnection = false;
-  (state.showModal = false), (state.ethernetRest = [-0.27, 1.074, -9.73]);
-  state.storedUserColors = state.resetUserColors;
-};
-
-const handleColorCode = () => {
-  state.glassbgDisplay = false;
-  state.targetPosZ = -9.829 - 5;
-  state.currentToolIndex = 12;
-  state.help = false;
-  state.startTraining = false;
-  state.playCrimpAnim = false;
-  state.equalArrays = false;
-  state.ethernetRest = [-0.27, 1.074, -9.73];
-  state.storedUserColors = state.resetUserColors;
-  setTimeout(() => {
-    state.showManual = true;
-  }, 1000);
-};
-
 function NavList() {
+  const snap = useSnapshot(state);
+
+  const handlePlayReversal = () => {
+    state.glassbgDisplay = true;
+    state.targetPosZ = -10.829 + 0.4;
+    state.showManual = false;
+    (state.showModal = false), (state.groupActive = 1);
+    state.currentToolIndex = 0;
+    state.level = 1;
+    state.startTraining = false;
+    state.help = false;
+    state.playCrimpAnim = false;
+    state.equalArrays = false;
+    state.internetConnection = false;
+    state.ethernetRest = [-0.27, 1.074, -9.73];
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
+  };
+
+  const handleTutorials = () => {
+    state.glassbgDisplay = false;
+    state.level = 1;
+    state.targetPosZ = -9.829 - 5;
+    state.currentToolIndex = 0;
+    state.startTraining = false;
+    state.help = false;
+    state.playCrimpAnim = false;
+    state.equalArrays = false;
+    (state.showModal = false), (state.internetConnection = false);
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
+    state.ethernetRest = [-0.27, 1.074, -9.73];
+    setTimeout(() => {
+      state.showManual = true;
+    }, 1000);
+  };
+
+  const handlePractice = () => {
+    state.glassbgDisplay = false;
+    state.targetPosZ = -9.829 - 5;
+    state.groupActive = 1;
+    state.level = 1;
+    state.currentToolIndex = 0;
+    state.help = false;
+    state.startTraining = true;
+    state.playCrimpAnim = false;
+    state.showManual = false;
+    state.equalArrays = false;
+    state.internetConnection = false;
+    (state.showModal = false), (state.ethernetRest = [-0.27, 1.074, -9.73]);
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
+  };
+
+  const handleColorCode = () => {
+    state.glassbgDisplay = false;
+    state.targetPosZ = -9.829 - 5;
+    state.currentToolIndex = 12;
+    state.help = false;
+    state.startTraining = false;
+    state.playCrimpAnim = false;
+    state.equalArrays = false;
+    state.ethernetRest = [-0.27, 1.074, -9.73];
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
+    setTimeout(() => {
+      state.showManual = true;
+    }, 1000);
+  };
   return (
     <ul className="my-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
       <Typography as="li" variant="small" color="white" className="p-1 font-medium text-xl">
@@ -115,6 +183,103 @@ const CableCraftNav = () => {
   const snap = useSnapshot(state);
 
   const handleWindowResize = () => window.innerWidth >= 960 && setOpenNav(false);
+
+  const handlePlayReversal = () => {
+    state.glassbgDisplay = true;
+    state.targetPosZ = -10.829 + 0.4;
+    state.showManual = false;
+    (state.showModal = false), (state.groupActive = 1);
+    state.currentToolIndex = 0;
+    state.level = 1;
+    state.startTraining = false;
+    state.help = false;
+    state.playCrimpAnim = false;
+    state.equalArrays = false;
+    state.internetConnection = false;
+    state.ethernetRest = [-0.27, 1.074, -9.73];
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
+  };
+
+  const handleTutorials = () => {
+    state.glassbgDisplay = false;
+    state.level = 1;
+    state.targetPosZ = -9.829 - 5;
+    state.currentToolIndex = 0;
+    state.startTraining = false;
+    state.help = false;
+    state.playCrimpAnim = false;
+    state.equalArrays = false;
+    (state.showModal = false), (state.internetConnection = false);
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
+    state.ethernetRest = [-0.27, 1.074, -9.73];
+    setTimeout(() => {
+      state.showManual = true;
+    }, 1000);
+  };
+
+  const handlePractice = () => {
+    state.glassbgDisplay = false;
+    state.targetPosZ = -9.829 - 5;
+    state.groupActive = 1;
+    state.level = 1;
+    state.currentToolIndex = 0;
+    state.help = false;
+    state.startTraining = true;
+    state.playCrimpAnim = false;
+    state.showManual = false;
+    state.equalArrays = false;
+    state.internetConnection = false;
+    (state.showModal = false), (state.ethernetRest = [-0.27, 1.074, -9.73]);
+    switch (snap.level) {
+      case 1: {
+        state.storedUserColors = snap?.levelOBJ.L1;
+        state.groupActive = 1;
+        break;
+      }
+      case 2: {
+        state.storedUserColors = snap?.levelOBJ.L2;
+        state.groupActive = 1;
+        break;
+      }
+      case 3: {
+        state.storedUserColors = snap?.levelOBJ.L3;
+        state.groupActive = 1;
+        break;
+      }
+    }
+  };
 
   useEffect(() => {
     window.addEventListener("resize", handleWindowResize);
