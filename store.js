@@ -2,9 +2,10 @@
  * Reason For structuring my code like this can be found here
  * https://chatgpt.com/share/3a7a1fbe-5b15-44ab-99fb-e78cec3d48b4
  */
+
 import { proxy, subscribe } from "valtio";
 
-const VERSION = "4.5"; // Increment this whenever you make significant changes
+const VERSION = "4.7"; // Increment this whenever you make significant changes
 
 const storedStateString =
   typeof window !== "undefined" && window?.localStorage.getItem("cablecraftReact");
