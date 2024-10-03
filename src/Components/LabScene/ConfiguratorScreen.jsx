@@ -360,7 +360,7 @@ const ConfiguratorScreen = () => {
                   </label>
                 </div>
               </div>
-              {/* Wire Selectors */}
+              {/* Wire Selectors here */}
               <div className="config-inner wire-selection mb-3 bg-black w-full flex flex-row items-center justify-center">
                 <div className="mx-1 hover:cursor-pointer">
                   {/* Prev Wire */}
